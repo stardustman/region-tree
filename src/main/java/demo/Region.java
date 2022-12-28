@@ -205,4 +205,49 @@ public class Region {
     }
 
 
+    public static List<Integer> getAllChildById(Integer regionId,List<Region> regions){
+        List<Integer> allChild = new ArrayList<>();
+        findChild(allChild,regionId,regions);
+        return allChild;
+    }
+
+    private static void findChild(List<Integer> allChild, Integer regionId,List<Region> regions) {
+        if (regions == null){
+            return;
+        }
+        for (Region region: regions) {
+            if (region.getRegionId().equals(regionId)){
+                addChildList(allChild,region.getChildren());
+            }
+            if (!region.getRegionId().equals(regionId) && region.getChildren() == null){
+                continue;
+            }
+            List<Region> childList = region.getChildren();
+            if (!region.getRegionId().equals(regionId) && childList!= null){
+                for (Region child: childList) {
+                    // find the regionId
+                    if(child.getRegionId().equals(regionId)){
+                        addChildList(allChild,child.getChildren());
+                    }
+                    if (child.getChildren() != null){
+                        findChild(allChild,regionId,child.getChildren());
+                    }
+                }
+            }
+        }
+    }
+
+    private static void addChildList(List<Integer> allChild, List<Region> children) {
+        if (children == null){
+            return;
+        }
+        for (Region region: children) {
+            allChild.add(region.getRegionId());
+            if (region.getChildren() != null){
+                addChildList(allChild,region.getChildren());
+            }
+        }
+    }
+
+
 }

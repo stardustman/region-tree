@@ -3,8 +3,8 @@ package demo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
 
 public class RegionTest {
     public static void main(String[] args) throws JsonProcessingException {
@@ -74,6 +74,8 @@ public class RegionTest {
         System.out.println(objectMapper.writeValueAsString(Region.getSubRegionTreeById(2,regionTree)));
         System.out.println(Region.getParentsById(10,regionTree));
         System.out.println(Region.getFullRegionNameById("/",10,regionTree));
+        System.out.println(Region.getAllChildById(1,regionTree));
+        System.out.println(Region.getAllChildById(38,regionTree));
 
     }
 

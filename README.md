@@ -1,4 +1,4 @@
 # region-tree
 data structure tree
 
-build a region tree
+transform a region list to a region tree
